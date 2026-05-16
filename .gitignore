@@ -1,0 +1,33 @@
+# Secrets et environnement
+.env
+*firebase-service-account.json
+*.pem
+*.key
+
+# Java / Spring Boot
+target/
+*.class
+.gradle/
+build/
+HELP.md
+
+# Node / React Native / Angular
+node_modules/
+npm-debug.log*
+yarn-error.log*
+dist/
+.expo/
+.angular/
+coverage/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

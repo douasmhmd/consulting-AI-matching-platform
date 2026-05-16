@@ -1,0 +1,103 @@
+services:
+
+  mongodb:
+    image: mongo:7
+    container_name: cp-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-admin}
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - cp-network
+
+  service-user:
+    build: ../../backend/service-user
+    container_name: cp-service-user
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://${MONGO_USER:-admin}:${MONGO_PASSWORD:-admin}@mongodb:27017/consulting?authSource=admin
+    networks:
+      - cp-network
+
+  service-consultant:
+    build: ../../backend/service-consultant
+    container_name: cp-service-consultant
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://${MONGO_USER:-admin}:${MONGO_PASSWORD:-admin}@mongodb:27017/consulting?authSource=admin
+    networks:
+      - cp-network
+
+  service-appointment:
+    build: ../../backend/service-appointment
+    container_name: cp-service-appointment
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://${MONGO_USER:-admin}:${MONGO_PASSWORD:-admin}@mongodb:27017/consulting?authSource=admin
+    networks:
+      - cp-network
+
+  service-ai:
+    build: ../../backend/service-ai
+    container_name: cp-service-ai
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://${MONGO_USER:-admin}:${MONGO_PASSWORD:-admin}@mongodb:27017/consulting?authSource=admin
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    networks:
+      - cp-network
+
+  service-notification:
+    build: ../../backend/service-notification
+    container_name: cp-service-notification
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://${MONGO_USER:-admin}:${MONGO_PASSWORD:-admin}@mongodb:27017/consulting?authSource=admin
+    networks:
+      - cp-network
+
+  api-gateway:
+    build: ../../backend/api-gateway
+    container_name: cp-api-gateway
+    restart: unless-stopped
+    depends_on:
+      - service-user
+      - service-consultant
+      - service-appointment
+      - service-ai
+      - service-notification
+    ports:
+      - "8080:8080"
+    networks:
+      - cp-network
+
+volumes:
+  mongo-data:
+
+networks:
+  cp-network:
+    driver: bridge
