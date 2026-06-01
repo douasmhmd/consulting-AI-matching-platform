@@ -9,7 +9,7 @@ certifie le mieux adapte (psychologie, nutrition, business, IT, relationnel).
 | Couche            | Technologie                          |
 |-------------------|--------------------------------------|
 | Mobile            | React Native (Expo)                  |
-| Backend           | Spring Boot 3 (Java 21), REST        |
+| Backend           | Spring Boot 4 (Java 21), REST        |
 | Backoffice        | Angular 17 PWA                       |
 | Base de donnees   | MongoDB 7                            |
 | Authentification  | Firebase Authentication + JWT        |
@@ -42,6 +42,23 @@ consulting-platform/
 - CLIENT : mene l'entretien IA, recoit un rapport, reserve un rendez-vous.
 - CONSULTANT : consulte son calendrier, le tableau de ses clients et leurs rapports.
 
+## Configuration des secrets (obligatoire)
+
+Ces fichiers ne sont PAS versionnes (voir .gitignore). Chaque developpeur doit les creer localement.
+
+**1. Cle Firebase** — placer le fichier dans :
+```
+backend/service-user/src/main/resources/firebase-service-account.json
+```
+A recuperer depuis : Console Firebase > Parametres du projet > Comptes de service > Generer une nouvelle cle privee.
+
+**2. Variables d'environnement** — creer `deployment/docker/.env` :
+```env
+MONGO_USER=admin
+MONGO_PASSWORD=admin
+OPENAI_API_KEY=votre_cle_openai
+```
+
 ## Demarrage rapide (developpement local)
 
 Prerequis : Docker, Node.js 22+, Java 21, MongoDB (ou via Docker Compose).
@@ -59,6 +76,16 @@ npm install && npm start
 cd ../backoffice
 npm install && ng serve
 ```
+## Ports des services
+
+| Service              | Port | Swagger                              |
+|----------------------|------|--------------------------------------|
+| API Gateway          | 8080 | -                                    |
+| Service Utilisateur  | 8081 | http://localhost:8081/swagger-ui.html |
+| Service Consultant   | 8082 | http://localhost:8082/swagger-ui.html |
+| Service Rendez-vous  | 8083 | http://localhost:8083/swagger-ui.html |
+| Service IA           | 8084 | a venir                              |
+| Service Notification | 8085 | a venir                              |
 
 ## Avancement (planning 3 semaines)
 
@@ -66,5 +93,24 @@ npm install && ng serve
 - [ ] Semaine 2 : service IA, entretien, rapport, matching, parcours client
 - [ ] Semaine 3 : backoffice, deploiement Docker, documentation, video
 
+## Avancement
+
+### Semaine 1 : fondations
+- [x] Service Utilisateur (auth Firebase + JWT, roles)
+- [x] Service Consultant (annuaire, validation admin)
+- [x] Service Rendez-vous (creneaux, reservations, statuts)
+- [x] Documentation Swagger
+
+### Semaine 2 : intelligence et parcours
+- [ ] Service IA (entretien, rapport, matching)
+- [ ] Service Notification
+- [ ] API Gateway
+- [ ] Parcours client mobile
+
+### Semaine 3 : finalisation
+- [ ] Backoffice Angular
+- [ ] Deploiement Docker complet / Kubernetes
+- [ ] Documentation technique et video de demo
+
 ## Equipe
-DOUAS MOHAMED / BOULAHJOUR OMAR 
+DOUAS MOHAMED (AI/IT engineer)/ BOULAHJOUR OMAR (IT engineer/Games dev )
