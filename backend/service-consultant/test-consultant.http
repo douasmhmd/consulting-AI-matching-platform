@@ -1,0 +1,28 @@
+### Test 1 — Health
+GET http://localhost:8082/api/consultants/health
+
+### Test 2 — Creer un profil consultant
+POST http://localhost:8082/api/consultants
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTExZTYzMGE0ZWQ1NjMwNzM3YjI5MTUiLCJlbWFpbCI6ImNvbnN1bHRhbnQxQHRlc3QuY29tIiwicm9sZSI6IkNPTlNVTFRBTlQiLCJpYXQiOjE3Nzk1NTg5MDEsImV4cCI6MTc3OTY0NTMwMX0.mPFYh0fdpNAp_8pmlcZd6exxy5BgnTvzKwwhAqR9hEDoQQQKKwAxRwoY3173XQMA
+
+{
+  "discipline": "PSYCHOLOGY",
+  "specialties": ["stress professionnel"],
+  "bio": "Psychologue specialise",
+  "pricePerSession": 350,
+  "languages": ["fr", "ar"]
+}
+
+### Test 3 — Consulter son profil
+GET http://localhost:8082/api/consultants/me
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTExZTYzMGE0ZWQ1NjMwNzM3YjI5MTUiLCJlbWFpbCI6ImNvbnN1bHRhbnQxQHRlc3QuY29tIiwicm9sZSI6IkNPTlNVTFRBTlQiLCJpYXQiOjE3Nzk1NTg5MDEsImV4cCI6MTc3OTY0NTMwMX0.mPFYh0fdpNAp_8pmlcZd6exxy5BgnTvzKwwhAqR9hEDoQQQKKwAxRwoY3173XQMA
+
+### Test 4 — Mise a jour
+PUT http://localhost:8082/api/consultants/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTExZTYzMGE0ZWQ1NjMwNzM3YjI5MTUiLCJlbWFpbCI6ImNvbnN1bHRhbnQxQHRlc3QuY29tIiwicm9sZSI6IkNPTlNVTFRBTlQiLCJpYXQiOjE3Nzk1NTg5MDEsImV4cCI6MTc3OTY0NTMwMX0.mPFYh0fdpNAp_8pmlcZd6exxy5BgnTvzKwwhAqR9hEDoQQQKKwAxRwoY3173XQMA
+
+{
+  "pricePerSession": 400
+}

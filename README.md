@@ -67,5 +67,4 @@ npm install && ng serve
 - [ ] Semaine 3 : backoffice, deploiement Docker, documentation, video
 
 ## Equipe
-
-A completer : noms et repartition des roles.
+DOUAS MOHAMED / BOULAHJOUR OMAR 

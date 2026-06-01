@@ -31,3 +31,31 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Secrets — NE JAMAIS COMMIT
+**/firebase-service-account.json
+**/.env
+*.key
+
+# Compilation Java / Maven
+**/target/
+*.class
+
+# IntelliJ
+**/.idea/
+*.iml
+
+# MongoDB / Docker volumes
+mongo-data/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (pour le futur mobile/Angular)
+**/node_modules/
+**/dist/
+**/build/
