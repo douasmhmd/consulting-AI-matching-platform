@@ -1,0 +1,40 @@
+### Test 1 — Health
+GET http://localhost:8083/api/appointments/health
+
+### Test 2 — Le client reserve un RDV
+POST http://localhost:8083/api/appointments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTE0NmQxY2RmYmZmNWZiN2Q1NjdlNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzgwMzQyMjAzLCJleHAiOjE3ODA0Mjg2MDN9.7WvlSaq8_CmiErby8pEGLkanCEgDmuGtTJ-kkurO7aQyyEbI15S5aVG-A__JZHCa
+
+{
+  "consultantId": "6a11eae76824003c3d114e41",
+  "dateTime": "2026-06-15T14:00:00Z",
+  "durationMinutes": 60,
+  "mode": "ONLINE",
+  "clientNote": "Premiere seance, stress au travail"
+}
+
+### Test 3 — Le client liste ses RDV
+GET http://localhost:8083/api/appointments/me
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTE0NmQxY2RmYmZmNWZiN2Q1NjdlNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzgwMzQyMjAzLCJleHAiOjE3ODA0Mjg2MDN9.7WvlSaq8_CmiErby8pEGLkanCEgDmuGtTJ-kkurO7aQyyEbI15S5aVG-A__JZHCa
+
+### Test 4 — Le consultant liste ses RDV
+GET http://localhost:8083/api/appointments/consultant/6a11eae76824003c3d114e41
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTExZTYzMGE0ZWQ1NjMwNzM3YjI5MTUiLCJlbWFpbCI6ImNvbnN1bHRhbnQxQHRlc3QuY29tIiwicm9sZSI6IkNPTlNVTFRBTlQiLCJpYXQiOjE3ODAzNDE5MTksImV4cCI6MTc4MDQyODMxOX0.W_iDTdqdHPr075d8HCKfnfRre3qkIF6SWyznP8mUAe1kewUJHUgAGQ83IaSOLmbv
+### Test 5 — Le consultant confirme le RDV (colle l'id du RDV obtenu au Test 2)
+PUT http://localhost:8083/api/appointments/6a1ddf2779339ea223921603/status
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTExZTYzMGE0ZWQ1NjMwNzM3YjI5MTUiLCJlbWFpbCI6ImNvbnN1bHRhbnQxQHRlc3QuY29tIiwicm9sZSI6IkNPTlNVTFRBTlQiLCJpYXQiOjE3ODAzNDE5MTksImV4cCI6MTc4MDQyODMxOX0.W_iDTdqdHPr075d8HCKfnfRre3qkIF6SWyznP8mUAe1kewUJHUgAGQ83IaSOLmbv
+
+{
+  "status": "CONFIRMED"
+}
+
+### Test 6 — Le consultant ajoute une note
+PUT http://localhost:8083/api/appointments/6a1ddf2779339ea223921603/consultant-note
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTExZTYzMGE0ZWQ1NjMwNzM3YjI5MTUiLCJlbWFpbCI6ImNvbnN1bHRhbnQxQHRlc3QuY29tIiwicm9sZSI6IkNPTlNVTFRBTlQiLCJpYXQiOjE3ODAzNDE5MTksImV4cCI6MTc4MDQyODMxOX0.W_iDTdqdHPr075d8HCKfnfRre3qkIF6SWyznP8mUAe1kewUJHUgAGQ83IaSOLmbv
+
+{
+  "consultantNote": "Merci de remplir le questionnaire avant la seance"
+}
