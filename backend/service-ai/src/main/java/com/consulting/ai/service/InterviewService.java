@@ -1,8 +1,13 @@
 package com.consulting.ai.service;
-
+import com.consulting.ai.client.ConsultantClient;
+import com.consulting.ai.client.dto.ConsultantDto;
+import com.consulting.ai.dto.MatchingResponse;
+import com.consulting.ai.model.Discipline;
+import com.consulting.ai.model.Interview;
+import com.consulting.ai.model.InterviewStatus;
+import com.consulting.ai.model.Message;
 import com.consulting.ai.client.OpenAiClient;
 import com.consulting.ai.client.dto.ChatMessage;
-import com.consulting.ai.model.*;
 import com.consulting.ai.repository.InterviewRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +21,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class InterviewService {
-
+    private final ConsultantClient consultantClient;
     private final OpenAiClient openAiClient;
     private final InterviewRepository interviewRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -41,6 +46,29 @@ public class InterviewService {
                 .role("assistant").content(aiReply).build());
 
         return interviewRepository.save(interview);
+    }
+    // Apres le rapport, propose des consultants de la discipline recommandee
+    public MatchingResponse getMatching(String interviewId, String clientId, String jwt) {
+        Interview interview = interviewRepository.findById(interviewId)
+                .orElseThrow(() -> new RuntimeException("Entretien introuvable"));
+
+        if (!interview.getClientId().equals(clientId)) {
+            throw new RuntimeException("Cet entretien ne vous appartient pas");
+        }
+        if (interview.getStatus() != InterviewStatus.COMPLETED) {
+            throw new RuntimeException("Le rapport n'a pas encore ete genere");
+        }
+
+        // Appeler le Service Consultant pour la discipline recommandee
+        List<ConsultantDto> consultants = consultantClient.findByDiscipline(
+                interview.getRecommendedDiscipline().name(), jwt);
+
+        return new MatchingResponse(
+                interview.getId(),
+                interview.getReport(),
+                interview.getRecommendedDiscipline(),
+                consultants
+        );
     }
 
     // Le client envoie une reponse, l'IA pose la question suivante

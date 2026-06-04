@@ -1,5 +1,6 @@
 package com.consulting.ai.controller;
 
+import com.consulting.ai.dto.MatchingResponse;
 import com.consulting.ai.dto.InterviewResponse;
 import com.consulting.ai.dto.SendMessageRequest;
 import com.consulting.ai.model.Interview;
@@ -15,7 +16,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/ai")
 @RequiredArgsConstructor
+
 public class InterviewController {
+    // Matching : propose des consultants apres le rapport
+    @GetMapping("/interviews/{id}/matching")
+    @PreAuthorize("hasRole('CLIENT')")
+    public ResponseEntity<MatchingResponse> getMatching(
+            @AuthenticationPrincipal String clientId,
+            @PathVariable String id,
+            @RequestHeader("Authorization") String authHeader) {
+        String jwt = authHeader.substring(7); // enlever "Bearer "
+        return ResponseEntity.ok(interviewService.getMatching(id, clientId, jwt));
+    }
 
     private final InterviewService interviewService;
 
