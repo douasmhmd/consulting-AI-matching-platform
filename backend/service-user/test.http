@@ -1,0 +1,50 @@
+### 1. Token Firebase CLIENT — test@test.com
+POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCU3zfmvsF7hU6iR2VMX4_HE33C_1DWFdU
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "Test1234",
+  "returnSecureToken": true
+}
+
+
+### 2. Token Firebase CONSULTANT — consultant1@test.com
+POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCU3zfmvsF7hU6iR2VMX4_HE33C_1DWFdU
+Content-Type: application/json
+
+{
+  "email": "consultant1@test.com",
+  "password": "Test1234",
+  "returnSecureToken": true
+}
+
+
+### 3. Login CLIENT (colle ici l'idToken obtenu en 1)
+POST http://localhost:8081/api/auth/login
+Content-Type: application/json
+
+{
+  "firebaseToken":"eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc5OTRiNGYzMTU2MzJiMjk3NzAwNmQ5M2U5NGIyYWNiZTMwNWZlNDYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY29uc3VsdGluZy1haS1wbGF0Zm9ybSIsImF1ZCI6ImNvbnN1bHRpbmctYWktcGxhdGZvcm0iLCJhdXRoX3RpbWUiOjE3ODA1NTYyMjcsInVzZXJfaWQiOiJwaXByb2NHc3BnVHhrVVhQSENUa2RqSVh5MDkyIiwic3ViIjoicGlwcm9jR3NwZ1R4a1VYUEhDVGtkaklYeTA5MiIsImlhdCI6MTc4MDU1NjIyNywiZXhwIjoxNzgwNTU5ODI3LCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGVzdEB0ZXN0LmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.Q_jzjU-UdGqdb50EV3kqK4AizlXcfTccaiv9mVusJsxaha16TemrNvsCgG16E7z7_P1Z6_6B3lS6J1A4CNihn7rhx6Lda5BqEqaLM6MwUpBf0Pb77x6oQUTjxsN-u6d81r0DTC8QG1KIODxyE-uoUfVbhQSb-RqEPvVb_vcQD06yngq2WS9zLqO0uX97JGcJ82pkkOKfN8OcKCepyU2BdmVBE85P42u2vAXnoG_a2P278wj8D773J7EZa5aLcMP4VLqFDwhrn4GJHVodTb66wZ4iyZNNZvWbtbFcXNmmpKglYFGDzKAEv0Jw751htqtRzcuUaQlmbUoEMMrNi6wpkg"
+}
+
+
+### 4. Login CONSULTANT (colle ici l'idToken obtenu en 2)
+POST http://localhost:8081/api/auth/login
+Content-Type: application/json
+
+{
+  "firebaseToken": "IDTOKEN_DU_CONSULTANT_ICI"
+}
+### Register CLIENT
+POST http://localhost:8081/api/auth/register
+Content-Type: application/json
+
+{
+  "firebaseToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM5YTBjMWRlYWEyN2JjNjMyNTUzYmM4MWEyMmQ4NzY1MWM3MTMyY2IiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY29uc3VsdGluZy1haS1wbGF0Zm9ybSIsImF1ZCI6ImNvbnN1bHRpbmctYWktcGxhdGZvcm0iLCJhdXRoX3RpbWUiOjE3Nzk3MjM1MTUsInVzZXJfaWQiOiJwaXByb2NHc3BnVHhrVVhQSENUa2RqSVh5MDkyIiwic3ViIjoicGlwcm9jR3NwZ1R4a1VYUEhDVGtkaklYeTA5MiIsImlhdCI6MTc3OTcyMzUxNSwiZXhwIjoxNzc5NzI3MTE1LCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGVzdEB0ZXN0LmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.Q6sw9bEhBwtm0zvs07c5w14RWoEsL1Ts--AaNgQNXdqG8E0RmtNrRQpB0y_bj8GDg9E3SHvvYNenaw0Hlj3O0Jv_68OkiUXaeULUWfEIrpy6euN_S50CaWMooBTzFJwxl6vAI0mtLOn8QTkn5sy7XX0jLD1sreSO4wck55qqSc9-nDgjL_9ZQ755CTsRdPNNT_yqzaxnxcRzanrSr-1oCWd1JASeomYTUE6_y0sTicalgEbvFiE4xR6qdQf1viMeRZstnzPq9aEymIkwq20U02DmjTexFfroLf4NhNpYndaJQp2V0YTfBNEMtLXARWxsCPnJOlP_MuCqm6NSs2hY2g",
+  "fullName": "Client Test",
+  "phone": "0600000000",
+  "role": "CLIENT",
+  "language": "fr",
+  "city": "Sale"
+}

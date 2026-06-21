@@ -1,0 +1,46 @@
+### Test 1 — Health (public, pas de JWT)
+GET http://localhost:8084/api/ai/health
+
+
+### Test 2 — Demarrer un entretien
+POST http://localhost:8084/api/ai/interviews
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTE0NmQxY2RmYmZmNWZiN2Q1NjdlNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzgwNTAxMjAzLCJleHAiOjE3ODA1ODc2MDN9.b6xsd5qT3FBwzwJTifKyKol5N0KrtMNoiOMCD4qasbo6cR7UVQttZIsiS1loH7Fv
+
+
+### Test 3 — Repondre a l'IA (colle l'id de l'entretien obtenu au Test 2)
+POST http://localhost:8084/api/ai/interviews/6a204b5f54eaeb879c57f67a/messages
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTE0NmQxY2RmYmZmNWZiN2Q1NjdlNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzgwNTAxMjAzLCJleHAiOjE3ODA1ODc2MDN9.b6xsd5qT3FBwzwJTifKyKol5N0KrtMNoiOMCD4qasbo6cR7UVQttZIsiS1loH7Fv
+
+{
+  "message": "Je me sens tres stresse au travail depuis quelques semaines, j'ai du mal a dormir"
+}
+
+
+### Test 4 — Continuer la conversation
+POST http://localhost:8084/api/ai/interviews/6a204b5f54eaeb879c57f67a/messages
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTE0NmQxY2RmYmZmNWZiN2Q1NjdlNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzgwNTAxMjAzLCJleHAiOjE3ODA1ODc2MDN9.b6xsd5qT3FBwzwJTifKyKol5N0KrtMNoiOMCD4qasbo6cR7UVQttZIsiS1loH7Fv
+
+{
+  "message": "Oui surtout a cause des deadlines, et ca affecte mon sommeil et mon humeur"
+}
+
+
+### Test 5 — Generer le rapport et la discipline recommandee
+POST http://localhost:8084/api/ai/interviews/6a204b5f54eaeb879c57f67a/report
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTE0NmQxY2RmYmZmNWZiN2Q1NjdlNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzgwNTAxMjAzLCJleHAiOjE3ODA1ODc2MDN9.b6xsd5qT3FBwzwJTifKyKol5N0KrtMNoiOMCD4qasbo6cR7UVQttZIsiS1loH7Fv
+
+
+### Test 6 — Consulter l'entretien complet
+GET http://localhost:8084/api/ai/interviews/6a204b5f54eaeb879c57f67a
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTE0NmQxY2RmYmZmNWZiN2Q1NjdlNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzgwNTAxMjAzLCJleHAiOjE3ODA1ODc2MDN9.b6xsd5qT3FBwzwJTifKyKol5N0KrtMNoiOMCD4qasbo6cR7UVQttZIsiS1loH7Fv
+
+
+### Test 7 — Lister mes entretiens
+GET http://localhost:8084/api/ai/interviews/me
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTE0NmQxY2RmYmZmNWZiN2Q1NjdlNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzgwNTAxMjAzLCJleHAiOjE3ODA1ODc2MDN9.b6xsd5qT3FBwzwJTifKyKol5N0KrtMNoiOMCD4qasbo6cR7UVQttZIsiS1loH7Fv
+
+### Matching — consultants recommandes apres le rapport
+GET http://localhost:8084/api/ai/interviews/6a204b5f54eaeb879c57f67a/matching
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTE0NmQxY2RmYmZmNWZiN2Q1NjdlNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzgwNTAxMjAzLCJleHAiOjE3ODA1ODc2MDN9.b6xsd5qT3FBwzwJTifKyKol5N0KrtMNoiOMCD4qasbo6cR7UVQttZIsiS1loH7Fv

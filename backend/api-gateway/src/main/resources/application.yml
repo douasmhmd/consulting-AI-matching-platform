@@ -1,0 +1,54 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          cors-configurations:
+            '[/**]':
+              allowed-origins: "*"
+              allowed-methods:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+                - OPTIONS
+                - PATCH
+              allowed-headers: "*"
+              allow-credentials: false
+              max-age: 3600
+          routes:
+            - id: service-user-auth
+              uri: ${USER_SERVICE_URL:http://localhost:8081}
+              predicates:
+                - Path=/api/auth/**
+
+            - id: service-user-users
+              uri: ${USER_SERVICE_URL:http://localhost:8081}
+              predicates:
+                - Path=/api/users/**
+
+            - id: service-consultant
+              uri: ${CONSULTANT_SERVICE_URL:http://localhost:8082}
+              predicates:
+                - Path=/api/consultants/**
+
+            - id: service-appointment
+              uri: ${APPOINTMENT_SERVICE_URL:http://localhost:8083}
+              predicates:
+                - Path=/api/appointments/**
+
+            - id: service-ai
+              uri: ${AI_SERVICE_URL:http://localhost:8084}
+              predicates:
+                - Path=/api/ai/**
+
+            - id: service-notification
+              uri: ${NOTIFICATION_SERVICE_URL:http://localhost:8085}
+              predicates:
+                - Path=/api/notifications/**

@@ -1,0 +1,33 @@
+### 1. Token Firebase CONSULTANT
+POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCU3zfmvsF7hU6iR2VMX4_HE33C_1DWFdU
+Content-Type: application/json
+
+{
+  "email": "consultant1@test.com",
+  "password": "Test1234",
+  "returnSecureToken": true
+}
+
+
+### 2. Login CONSULTANT — colle l'idToken de l'etape 1
+POST http://localhost:8081/api/auth/login
+Content-Type: application/json
+
+{
+  "firebaseToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1NGFhNGMyM2VkZTdiOGNhODc1OWZiMDZlNmExZDU4OTI0MjVkMDYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY29uc3VsdGluZy1haS1wbGF0Zm9ybSIsImF1ZCI6ImNvbnN1bHRpbmctYWktcGxhdGZvcm0iLCJhdXRoX3RpbWUiOjE3ODAzMzk2NjUsInVzZXJfaWQiOiI5NDlob1F1OG9wUDBIc3A3dmtxeWJ1bzJzNE8yIiwic3ViIjoiOTQ5aG9RdThvcFAwSHNwN3ZrcXlidW8yczRPMiIsImlhdCI6MTc4MDMzOTY2NSwiZXhwIjoxNzgwMzQzMjY1LCJlbWFpbCI6ImNvbnN1bHRhbnQxQHRlc3QuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImNvbnN1bHRhbnQxQHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.LGhhmGgkaOSP2k7l7jleNnxhL1jQBRL5rf387MOFantRGDssZH0PXNxDrsnF5Hdmlv49cuFhMb6ZCEOtCA4YVUI1a8LFzbbxKwThnjXp3RVJNefdTXSrMsGDY1XPH9bCGkmfcX2o9d023iF5F_h9CAxO9WoJ-pUSDm0ksy_VbBZWL1TQNophLEZSfxHOuFd59Lhv8IbudZWtmtsJEif6SORSIEi8EE3XnMlrml8xEyMIhC6zWmsHHndVnb0vgaeM1J36XSMqFP56aSrhop3zE6nwnTPzGQwBLLXhlNPSnsrNhxzsd1RVmqOLnEfKchnjFU9Mu7H8b1VLcVoBdJ0OnQ"
+}
+
+
+### 3. Consulter son profil — colle le token applicatif de l'etape 2
+GET http://localhost:8082/api/consultants/me
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTExZTYzMGE0ZWQ1NjMwNzM3YjI5MTUiLCJlbWFpbCI6ImNvbnN1bHRhbnQxQHRlc3QuY29tIiwicm9sZSI6IkNPTlNVTFRBTlQiLCJpYXQiOjE3ODAzNDE5MTksImV4cCI6MTc4MDQyODMxOX0.W_iDTdqdHPr075d8HCKfnfRre3qkIF6SWyznP8mUAe1kewUJHUgAGQ83IaSOLmbv
+
+
+### 4. Mise a jour du profil
+PUT http://localhost:8082/api/consultants/me
+Content-Type: application/json
+Authorization: Bearer COLLE_JWT_CONSULTANT
+
+{
+  "pricePerSession": 400
+}

@@ -1,0 +1,27 @@
+### Test 1 — Health
+GET http://localhost:8085/api/notifications/health
+
+### Test 2 — Enregistrer un token FCM (appareil du client)
+POST http://localhost:8085/api/notifications/register-token
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTE0NmQxY2RmYmZmNWZiN2Q1NjdlNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzgwNTU2MjYzLCJleHAiOjE3ODA2NDI2NjN9.9-BQctcnmopk_-RLT90fF7qy7L1U4yOn28w6jLoL1DzbXvYUhy9W1Mm6kvm427Ye
+
+{
+  "fcmToken": "faux-token-fcm-de-test-123456"
+}
+
+### Test 3 — Envoyer une notification a un utilisateur
+POST http://localhost:8085/api/notifications/send
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTE0NmQxY2RmYmZmNWZiN2Q1NjdlNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzgwNTU2MjYzLCJleHAiOjE3ODA2NDI2NjN9.9-BQctcnmopk_-RLT90fF7qy7L1U4yOn28w6jLoL1DzbXvYUhy9W1Mm6kvm427Ye
+
+{
+  "userId": "6a146d1cdfbff5fb7d567e61",
+  "title": "Rendez-vous confirme",
+  "body": "Votre consultant a confirme votre rendez-vous du 15 juin",
+  "type": "APPOINTMENT_CONFIRMED"
+}
+
+### Test 4 — Consulter mes notifications
+GET http://localhost:8085/api/notifications/me
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2YTE0NmQxY2RmYmZmNWZiN2Q1NjdlNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzgwNTU2MjYzLCJleHAiOjE3ODA2NDI2NjN9.9-BQctcnmopk_-RLT90fF7qy7L1U4yOn28w6jLoL1DzbXvYUhy9W1Mm6kvm427Ye

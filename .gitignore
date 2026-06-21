@@ -1,0 +1,38 @@
+# ===== SECRETS =====
+.env
+*.env
+*.pem
+*.key
+**/firebase-service-account.json
+
+# ===== JAVA / MAVEN =====
+**/target/
+**/.gradle/
+*.class
+*.jar
+*.war
+HELP.md
+
+# ===== NODE / MOBILE / ANGULAR =====
+**/node_modules/
+**/dist/
+**/.expo/
+**/.angular/
+**/coverage/
+npm-debug.log*
+yarn-error.log*
+
+# ===== IDE =====
+**/.idea/
+**/.vscode/
+*.iml
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== LOGS =====
+*.log
+
+# ===== DOCKER =====
+mongo-data/
